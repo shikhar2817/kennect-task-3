@@ -8,6 +8,10 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT;
 
+app.get("/", (req: Request, res: Response) => {
+    res.send("Welcome, Try api routes given in the readme file in github repo.");
+});
+
 app.get("/health", (req: Request, res: Response) => {
     res.send("Server is healthy!");
 });
