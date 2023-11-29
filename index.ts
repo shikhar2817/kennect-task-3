@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
-import { addDate } from "./utils/dateParser";
+import { getNewDate } from "./utils/dateParser";
+import { Opertation } from "./types";
 
 dotenv.config();
 
@@ -11,10 +12,11 @@ app.get("/health", (req: Request, res: Response) => {
     res.send("Server is healthy!");
 });
 
-app.get("/add", (req: Request, res: Response) => {
+app.get("/api", (req: Request, res: Response) => {
     try {
-        const { days, weeks, to } = req.query;
-        const newDate = addDate(
+        const { operation, days, weeks, to } = req.query;
+        const newDate = getNewDate(
+            (operation ?? "subtract") as Opertation,
             Number(days ?? 0),
             Number(weeks ?? 0),
             to as string
